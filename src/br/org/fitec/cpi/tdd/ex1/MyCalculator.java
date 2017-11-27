@@ -17,7 +17,8 @@ public class MyCalculator implements Calculator {
 
 	public static final String NEGATIVE_NOT_ALLOWED = "negatives not allowed: ";
 	public static final String SPLITER = ",";
-
+	public static final String SEPARATOR = " ";
+	
 	@Override
 	public int add(String s) throws NegativeNumberException {
 		
@@ -31,9 +32,9 @@ public class MyCalculator implements Calculator {
 
 		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number < 0).toArray();
 
-		if (numbersNotAllowed.length == 0) {
+		if (numbersNotAllowed.length > 0) {
 			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED
-					+ Arrays.stream(numbersNotAllowed).mapToObj(Integer::toString).collect(Collectors.joining(" ")));
+					+ Arrays.stream(numbersNotAllowed).mapToObj(Integer::toString).collect(Collectors.joining(SEPARATOR)));
 		}
 
 		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed) >= 0)
@@ -47,16 +48,17 @@ public class MyCalculator implements Calculator {
 		if (s == null || s.isEmpty())
 			return 0;
 
-		String[] values = s.split(",");
+		String[] values = s.split(SPLITER);
 		int result = 0;
 		int num = 0;
 
 		StringBuilder builder = new StringBuilder();
+		
 		for (String value : values) {
 
 			num = Integer.parseInt(value.trim());
 			if (num < 0) {
-				builder.append(num + " ");
+				builder.append(num + SEPARATOR);
 				continue;
 			}
 			if (num > 1000) {
