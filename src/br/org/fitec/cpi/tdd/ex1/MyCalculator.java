@@ -73,13 +73,13 @@ public class MyCalculator implements Calculator {
 	}
 
 	@Override
-	public int multiply(String s) throws NegativeNumberException {
+	public double multiply(String s) throws NegativeNumberException {
 
 		if(s == null || s.isEmpty())
 			return 0;
 		
 		String [] values = s.split(",");
-		int result = 1;
+		double result = 1;
 		int num = 0;
 		
 		StringBuilder builder = new StringBuilder();
@@ -106,13 +106,17 @@ public class MyCalculator implements Calculator {
 	}
 
 	@Override
-	public int divide(String s) throws NegativeNumberException, DivisionByZeroException {
+	public double divide(String s) throws NegativeNumberException, DivisionByZeroException {
 
 		if(s == null || s.isEmpty())
 			return 0;
 		
 		String [] values = s.split(",");
-		int result = 0;
+		
+		if(Integer.parseInt(values[0].trim()) == 0)
+			return 0;
+		
+		double result = 0.0;
 		int num = 0;
 		StringBuilder builder = new StringBuilder();
 		

@@ -209,27 +209,27 @@ public class MyCalculatorTest {
 	public void testMultiplyTwoNumbersSuccess() throws NegativeNumberException {
 
 		String s = "4,4";
-		int result = myCalculator.multiply(s);
-		Assert.assertEquals(16, result);
+		double result = myCalculator.multiply(s);
+		Assert.assertEquals(16, result, 0.01);
 	}
 
 	@Test
 	public void testMultiplyOneNumberSuccess() throws NegativeNumberException {
 
 		String s = "4";
-		int result = myCalculator.multiply(s);
-		Assert.assertEquals(4, result);
+		double result = myCalculator.multiply(s);
+		Assert.assertEquals(4, result, 0.01);
 	}
 
 	@Test
 	public void testMultiplyNoNumberSuccess() throws NegativeNumberException {
 
 		String s = "";
-		int result = myCalculator.multiply(s);
-		Assert.assertEquals(0, result);
+		double result = myCalculator.multiply(s);
+		Assert.assertEquals(0, result, 0.01);
 
 		result = myCalculator.multiply(null);
-		Assert.assertEquals(0, result);
+		Assert.assertEquals(0, result, 0.01);
 	}
 
 	@Test
@@ -280,8 +280,8 @@ public class MyCalculatorTest {
 	public void testMultiplyNumberBiggerThan1000ShouldBeIgnored() throws NegativeNumberException {
 		
 		String s = "2, 2000, 3";
-		int result = myCalculator.multiply(s);
-		Assert.assertEquals(6, result);
+		double result = myCalculator.multiply(s);
+		Assert.assertEquals(6, result, 0.01);
 		
 	}
 	
@@ -289,27 +289,27 @@ public class MyCalculatorTest {
 	public void testDivideTwoNumbersSuccess() throws NegativeNumberException, DivisionByZeroException {
 		
 		String s = "16,2";
-		int result = myCalculator.divide(s);
-		Assert.assertEquals(8, result);
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(8, result, 0.01);
 	}
 	
 	@Test
 	public void testDivideOneNumberSuccess() throws NegativeNumberException, DivisionByZeroException {
 		
 		String s = "8";
-		int result = myCalculator.divide(s);
-		Assert.assertEquals(8, result);
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(8, result, 0.01);
 	}
 	
 	@Test
 	public void testDivideNoNumberSuccess() throws NegativeNumberException, DivisionByZeroException {
 		
 		String s = "";
-		int result = myCalculator.divide(s);
-		Assert.assertEquals(0, result);
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(0, result, 0.01);
 		
 		result = myCalculator.divide(null);
-		Assert.assertEquals(0, result);
+		Assert.assertEquals(0, result, 0.01);
 	}
 	
 	@Test
@@ -360,8 +360,8 @@ public class MyCalculatorTest {
 	public void testDivideNumberBiggerThan1000ShouldBeIgnored() throws NegativeNumberException, DivisionByZeroException {
 		
 		String s = "8,2000,2";
-		int result = myCalculator.divide(s);
-		Assert.assertEquals(4, result);
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(4, result, 0.01);
 	}
 	
 	@Test
@@ -379,7 +379,24 @@ public class MyCalculatorTest {
 	public void testDivideAnyNumber() throws DivisionByZeroException, NegativeNumberException {
 		
 		String s = "160, 2, 2, 2 ,2";
-		int result = myCalculator.divide(s);
-		Assert.assertEquals(10, result);
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(10.0, result, 0.01);
+	}
+	
+	@Test
+	public void testDivideShouldHaveDecimalNumber() throws NegativeNumberException, DivisionByZeroException {
+		
+		String s = "5, 2";
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(2.5, result, 0.01);
+		
+	}
+	
+	@Test
+	public void testDivideZeroNumeratorShouldBeZero() throws NegativeNumberException, DivisionByZeroException {
+		
+		String s = "0,2";
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(0.0, result, 0.01);
 	}
 }

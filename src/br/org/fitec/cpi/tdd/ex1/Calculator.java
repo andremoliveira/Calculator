@@ -16,7 +16,7 @@ public interface Calculator
 
 	public int subtract(String s) throws NegativeNumberException;
 
-	public int multiply(String s) throws NegativeNumberException;
+	public double multiply(String s) throws NegativeNumberException;
 
-	public int divide(String s) throws NegativeNumberException, DivisionByZeroException;
+	public double divide(String s) throws NegativeNumberException, DivisionByZeroException;
 }
