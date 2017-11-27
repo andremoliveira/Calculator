@@ -110,6 +110,15 @@ public class MyCalculatorTest {
 			Assert.assertEquals("negatives not allowed: -2 -1", msg);
 		}
 	}
+	
+    @Test
+    public void testNumberBiggerThan1000ShouldBeIgnored() throws NegativeNumberException
+    {
+        String s = "2,1001,3";
+        int result = myCalculator.add(s);
+
+        Assert.assertEquals(5, result);
+    }
 
 	@Test
 	public void testSubtractTwoNumbers() throws NegativeNumberException {
@@ -146,7 +155,7 @@ public class MyCalculatorTest {
 			myCalculator.subtract(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -1", msg);
 		}
 	}
 
@@ -157,7 +166,7 @@ public class MyCalculatorTest {
 			myCalculator.subtract(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -1", msg);
 		}
 	}
 
@@ -168,7 +177,7 @@ public class MyCalculatorTest {
 			myCalculator.subtract(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -3 -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -3 -1", msg);
 		}
 	}
 
@@ -179,7 +188,7 @@ public class MyCalculatorTest {
 			myCalculator.subtract(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -2 -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -2 -1", msg);
 		}
 	}
 
@@ -208,7 +217,7 @@ public class MyCalculatorTest {
 	@Test
 	public void testMultiplyTwoNumbersSuccess() throws NegativeNumberException {
 
-		String s = "4,4";
+		String s = "4, 4";
 		double result = myCalculator.multiply(s);
 		Assert.assertEquals(16, result, 0.01);
 	}

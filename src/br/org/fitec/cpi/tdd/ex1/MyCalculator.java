@@ -38,7 +38,9 @@ public class MyCalculator implements Calculator {
 		}
 
 		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed) >= 0)
-				.mapToInt(number -> Integer.parseInt(number.trim())).sum();
+				.mapToInt(number -> Integer.parseInt(number.trim()))
+				.filter(numberAllowed -> numberAllowed < 1001)
+				.sum();
 
 	}
 
@@ -49,34 +51,22 @@ public class MyCalculator implements Calculator {
 			return 0;
 
 		String[] values = s.split(SPLITER);
-		int result = 0;
-		int num = 0;
 
-		StringBuilder builder = new StringBuilder();
+		int[] numbersNotAllowed = Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim())).toArray();
+
+		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number < 0).toArray();
+
+		if (numbersNotAllowed.length > 0) {
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED
+					+ Arrays.stream(numbersNotAllowed).mapToObj(Integer::toString).collect(Collectors.joining(SEPARATOR)));
+		}
 		
-		for (String value : values) {
-
-			num = Integer.parseInt(value.trim());
-			if (num < 0) {
-				builder.append(num + SEPARATOR);
-				continue;
-			}
-			if (num > 1000) {
-				continue;
-			}
-
-			if (result == 0) {
-				result += num;
-			} else {
-				result -= num;
-			}
-
-		}
-
-		if (builder.length() > 0) {
-			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
-		}
-		return result;
+		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed.trim()) >= 0)
+				.mapToInt(number -> Integer.parseInt(number.trim()))
+				.filter(numberAllowed -> numberAllowed < 1001)
+				.reduce((a, b) -> a - b)
+				.getAsInt();
+		
 	}
 
 	@Override
