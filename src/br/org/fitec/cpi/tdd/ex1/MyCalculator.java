@@ -59,30 +59,13 @@ public class MyCalculator implements Calculator {
 			return 0;
 
 		String[] values = s.split(",");
-		double result = 1;
-		int num = 0;
-
-		StringBuilder builder = new StringBuilder();
-		for (String value : values) {
-
-			num = Integer.parseInt(value.trim());
-			if (num < 0) {
-				builder.append(num + " ");
-				continue;
-			}
-
-			if (num > 1000) {
-				continue;
-			}
-
-			result *= num;
-
-		}
-		if (builder.length() > 0) {
-			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
-		}
-
-		return result;
+		
+		this.validateNumbersAllowed(values);
+		
+		return Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim()))
+		.filter(numberAllowed -> numberAllowed < 1001)
+		.reduce((a, b) -> a * b).getAsInt();
+		
 	}
 
 	@Override
