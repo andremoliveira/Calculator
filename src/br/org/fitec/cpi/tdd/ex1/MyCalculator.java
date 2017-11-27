@@ -30,8 +30,8 @@ public class MyCalculator implements Calculator {
 
 		this.validateNumbersAllowed(values);
 
-		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed) >= 0)
-				.mapToInt(number -> Integer.parseInt(number.trim())).filter(numberAllowed -> numberAllowed < 1001)
+		return Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim()))
+				.filter(numberAllowed -> numberAllowed < 1001)
 				.sum();
 
 	}
@@ -46,8 +46,8 @@ public class MyCalculator implements Calculator {
 
 		this.validateNumbersAllowed(values);
 
-		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed.trim()) >= 0)
-				.mapToInt(number -> Integer.parseInt(number.trim())).filter(numberAllowed -> numberAllowed < 1001)
+		return Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim()))
+				.filter(numberAllowed -> numberAllowed < 1001)
 				.reduce((a, b) -> a - b).getAsInt();
 
 	}
