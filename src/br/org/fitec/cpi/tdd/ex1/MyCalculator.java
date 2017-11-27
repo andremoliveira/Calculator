@@ -18,28 +18,20 @@ public class MyCalculator implements Calculator {
 	public static final String NEGATIVE_NOT_ALLOWED = "negatives not allowed: ";
 	public static final String SPLITER = ",";
 	public static final String SEPARATOR = " ";
-	
+
 	@Override
 	public int add(String s) throws NegativeNumberException {
-		
+
 		if (s == null || s.length() == 0) {
 			return 0;
 		}
-		
+
 		String[] values = s.split(SPLITER);
 
-		int[] numbersNotAllowed = Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim())).toArray();
-
-		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number < 0).toArray();
-
-		if (numbersNotAllowed.length > 0) {
-			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED
-					+ Arrays.stream(numbersNotAllowed).mapToObj(Integer::toString).collect(Collectors.joining(SEPARATOR)));
-		}
+		this.validateNumbersAllowed(values);
 
 		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed) >= 0)
-				.mapToInt(number -> Integer.parseInt(number.trim()))
-				.filter(numberAllowed -> numberAllowed < 1001)
+				.mapToInt(number -> Integer.parseInt(number.trim())).filter(numberAllowed -> numberAllowed < 1001)
 				.sum();
 
 	}
@@ -52,21 +44,12 @@ public class MyCalculator implements Calculator {
 
 		String[] values = s.split(SPLITER);
 
-		int[] numbersNotAllowed = Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim())).toArray();
+		this.validateNumbersAllowed(values);
 
-		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number < 0).toArray();
-
-		if (numbersNotAllowed.length > 0) {
-			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED
-					+ Arrays.stream(numbersNotAllowed).mapToObj(Integer::toString).collect(Collectors.joining(SEPARATOR)));
-		}
-		
 		return Arrays.stream(values).filter(numberAllowed -> Integer.parseInt(numberAllowed.trim()) >= 0)
-				.mapToInt(number -> Integer.parseInt(number.trim()))
-				.filter(numberAllowed -> numberAllowed < 1001)
-				.reduce((a, b) -> a - b)
-				.getAsInt();
-		
+				.mapToInt(number -> Integer.parseInt(number.trim())).filter(numberAllowed -> numberAllowed < 1001)
+				.reduce((a, b) -> a - b).getAsInt();
+
 	}
 
 	@Override
@@ -145,4 +128,15 @@ public class MyCalculator implements Calculator {
 		return result;
 	}
 
+	private void validateNumbersAllowed(String[] values) throws NegativeNumberException {
+
+		int[] numbersNotAllowed = Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim())).toArray();
+
+		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number < 0).toArray();
+
+		if (numbersNotAllowed.length > 0) {
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + Arrays.stream(numbersNotAllowed)
+					.mapToObj(Integer::toString).collect(Collectors.joining(SEPARATOR)));
+		}
+	}
 }
