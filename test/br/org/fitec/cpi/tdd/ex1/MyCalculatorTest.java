@@ -328,7 +328,7 @@ public class MyCalculatorTest {
 			myCalculator.divide(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -1", msg);
 		}
 	}
 
@@ -339,7 +339,7 @@ public class MyCalculatorTest {
 			myCalculator.divide(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -1", msg);
 		}
 	}
 
@@ -350,7 +350,7 @@ public class MyCalculatorTest {
 			myCalculator.divide(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -3 -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -3 -1", msg);
 		}
 	}
 
@@ -361,7 +361,7 @@ public class MyCalculatorTest {
 			myCalculator.divide(s);
 		} catch (NegativeNumberException e) {
 			String msg = e.getMessage();
-			Assert.assertEquals("negatives not allowed: -2 -1 ", msg);
+			Assert.assertEquals("negatives not allowed: -2 -1", msg);
 		}
 	}
 	
