@@ -12,6 +12,8 @@ package br.org.fitec.cpi.tdd.ex1;
 
 public class MyCalculator implements Calculator {
 
+	public static final String NEGATIVE_NOT_ALLOWED = "negatives not allowed: ";
+	
 	@Override
 	public int add(String s) throws NegativeNumberException {
 		if (s == null || s.length() == 0) {
@@ -31,7 +33,7 @@ public class MyCalculator implements Calculator {
 			}
 		}
 		if (builder.length() > 0) {
-			throw new NegativeNumberException("negatives not allowed: " + builder.toString());
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
 		}
 		return sum;
 	}
@@ -67,7 +69,7 @@ public class MyCalculator implements Calculator {
 		}
 
 		if (builder.length() > 0) {
-			throw new NegativeNumberException("negatives not allowed: " + builder.toString());
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
 		}
 		return result;
 	}
@@ -99,7 +101,7 @@ public class MyCalculator implements Calculator {
 			
 		}
 		if (builder.length() > 0) {
-			throw new NegativeNumberException("negatives not allowed: " + builder.toString());
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
 		}
 		
 		return result;
@@ -143,7 +145,7 @@ public class MyCalculator implements Calculator {
 		}
 		
 		if (builder.length() > 0) {
-			throw new NegativeNumberException("negatives not allowed: " + builder.toString());
+			throw new NegativeNumberException(NEGATIVE_NOT_ALLOWED + builder.toString());
 		}
 		return result;
 	}
