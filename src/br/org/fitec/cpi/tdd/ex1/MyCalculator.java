@@ -10,14 +10,17 @@
 // **********************************************************************
 package br.org.fitec.cpi.tdd.ex1;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Arrays;
 import java.util.stream.Collectors;
 
 public class MyCalculator implements Calculator {
 
-	public static final String NEGATIVE_NOT_ALLOWED = "negatives not allowed: ";
-	public static final String SPLITER = ",";
-	public static final String SEPARATOR = " ";
+	private static final String NEGATIVE_NOT_ALLOWED = "negatives not allowed: ";
+	private static final String SPLITER = ",";
+	private static final String SEPARATOR = " ";
+	private static final int DECIMAL_PLACES = 1;
 
 	@Override
 	public int add(String s) throws NegativeNumberException {
@@ -31,7 +34,7 @@ public class MyCalculator implements Calculator {
 		this.validateNumbersAllowed(values);
 
 		return Arrays.stream(values).mapToInt(number -> Integer.parseInt(number.trim()))
-				.filter(numberAllowed -> numberAllowed < 1001).sum();
+				.filter(numberAllowed -> numberAllowed < 1001).reduce((a, b) -> a + b).getAsInt();
 
 	}
 
@@ -56,7 +59,7 @@ public class MyCalculator implements Calculator {
 		if (s == null || s.isEmpty())
 			return 0;
 
-		String[] values = s.split(",");
+		String[] values = s.split(SPLITER);
 
 		this.validateNumbersAllowed(values);
 
@@ -75,14 +78,16 @@ public class MyCalculator implements Calculator {
 
 		this.validateNumbersAllowed(values);
 
+		this.validateDivisionByZero(values);
+		
 		if (Integer.parseInt(values[0].trim()) == 0)
 			return 0;
 
-		this.validateDivisionByZero(values);
-
-		return Arrays.stream(values).mapToDouble(number -> Integer.parseInt(number.trim()))
+		Double d = Arrays.stream(values).mapToDouble(number -> Integer.parseInt(number.trim()))
 				.filter(numberAllowed -> numberAllowed < 1001).reduce((a, b) -> a / b).getAsDouble();
-
+		
+	    return new BigDecimal(d).setScale(DECIMAL_PLACES, RoundingMode.HALF_UP).doubleValue();
+		
 	}
 
 	private void validateNumbersAllowed(String[] values) throws NegativeNumberException {

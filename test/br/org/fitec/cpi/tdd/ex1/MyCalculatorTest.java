@@ -408,4 +408,12 @@ public class MyCalculatorTest {
 		double result = myCalculator.divide(s);
 		Assert.assertEquals(0.0, result, 0.01);
 	}
+	
+	@Test
+	public void testDivideDecimalPrintedRestrictToOnePlace() throws NegativeNumberException, DivisionByZeroException {
+		
+		String s = "5,3";
+		double result = myCalculator.divide(s);
+		Assert.assertEquals(1.7, result, 0.01);
+	}
 }
