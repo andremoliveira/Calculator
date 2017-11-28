@@ -108,6 +108,10 @@ public class MyCalculator implements Calculator {
 
 		numbersNotAllowed = Arrays.stream(numbersNotAllowed).filter(number -> number == 0).toArray();
 
+		if(Integer.parseInt(values[0]) == 0 && numbersNotAllowed.length == 1){
+			return;
+		}
+		
 		if (numbersNotAllowed.length > 0) {
 			throw new DivisionByZeroException();
 		}

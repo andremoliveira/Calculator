@@ -382,6 +382,14 @@ public class MyCalculatorTest {
 			String msg = e.getMessage();
 			Assert.assertEquals("Division by 0 is not allowed", msg);
 		}
+		
+		s = "0,0";
+		try {
+			myCalculator.divide(s);
+		} catch (DivisionByZeroException e) {
+			String msg = e.getMessage();
+			Assert.assertEquals("Division by 0 is not allowed", msg);
+		}
 	}
 	
 	@Test
