@@ -79,15 +79,15 @@ public class MyCalculator implements Calculator {
 		this.validateNumbersAllowed(values);
 
 		this.validateDivisionByZero(values);
-		
+
 		if (Integer.parseInt(values[0].trim()) == 0)
 			return 0;
 
 		Double d = Arrays.stream(values).mapToDouble(number -> Integer.parseInt(number.trim()))
 				.filter(numberAllowed -> numberAllowed < 1001).reduce((a, b) -> a / b).getAsDouble();
-		
-	    return new BigDecimal(d).setScale(DECIMAL_PLACES, RoundingMode.HALF_UP).doubleValue();
-		
+
+		return new BigDecimal(d).setScale(DECIMAL_PLACES, RoundingMode.HALF_UP).doubleValue();
+
 	}
 
 	private void validateNumbersAllowed(String[] values) throws NegativeNumberException {

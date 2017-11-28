@@ -391,7 +391,7 @@ public class MyCalculatorTest {
 		double result = myCalculator.divide(s);
 		Assert.assertEquals(10.0, result, 0.01);
 	}
-	
+
 	@Test
 	public void testDivideShouldHaveDecimalNumber() throws NegativeNumberException, DivisionByZeroException {
 		
